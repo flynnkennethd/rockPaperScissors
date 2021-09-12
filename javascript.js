@@ -1,16 +1,20 @@
 const userScoreCounter= document.getElementById('user-score');
 const cpuScoreCounter = document.getElementById('cpu-score');
 const winLoseMessage = document.getElementById('win-lose-message');
+const userIndicator = document.getElementById('user-indicator');
+const cpuIndicator = document.getElementById('cpu-indicator');
 let user;
 let cpu;
 let userScore = 0;
 let cpuScore = 0;
 let decision;
-//function that assigns the user's choice to the user variable
+
+//function that assigns the user's choice to the user variable and displays it in the indicator
 function userChoice(choice) {
     user = choice;
+    userIndicator.innerHTML = `You chose ${user}.`;
 }
-//function to assign the cpu choice
+//function to assign the cpu choice and display it in the indicator
 function cpuChoice() {
     let randomNum = Math.floor(Math.random() * 3);
     switch (randomNum){
@@ -24,7 +28,7 @@ function cpuChoice() {
             cpu = 'scissors';
             break;
     }
-    console.log(cpu);
+    cpuIndicator.innerHTML = `Computer chose ${cpu}.`;
 }
 
 //function to compare user and cpu and return the win/lose message
@@ -78,4 +82,16 @@ function messageWriter() {
 function scoreUpdate() {
     userScoreCounter.innerHTML = userScore;
     cpuScoreCounter.innerHTML = cpuScore;
+}
+function gameEnd() {
+    if (userScore === 3) {
+        winLoseMessage.innerHTML = 'You won the best of 5!'
+        userScore = 0;
+        cpuScore = 0;
+    }
+    else if (cpuScore === 3){
+        winLoseMessage.innerHTML = 'Oh  no! You lost the best of 5.'
+        userScore = 0;
+        cpuScore = 0;
+    }
 }

@@ -20,20 +20,20 @@
                 <p id="cpu-score">0</p>
             </div>
         </div>
-        <div class = "input-buttons">
-            <button onclick="userChoice('rock');cpuChoice();compare();messageWriter();scoreUpdate()">rock</button>
-            <button onclick="userChoice('paper');cpuChoice();compare();messageWriter();scoreUpdate()">paper</button>
-            <button onclick="userChoice('scissors');cpuChoice();compare();messageWriter();scoreUpdate()">Scissors</button>
+        <div class="input-buttons">
+            <button onclick="userChoice('rock');cpuChoice();compare();messageWriter();scoreUpdate();gameEnd()">Rock</button>
+            <button onclick="userChoice('paper');cpuChoice();compare();messageWriter();scoreUpdate();gameEnd()">Paper</button>
+            <button onclick="userChoice('scissors');cpuChoice();compare();messageWriter();scoreUpdate();gameEnd()">Scissors</button>
         </div>
-        <div>
-            <img src="#">
-            <img src="#">
+        <div class="indicators">
+            <p id="user-indicator"></p>
+            <p id="cpu-indicator"></p>
         </div>
         <p id="win-lose-message"></p>
     </main>
     <footer>
         <p>This is a project made by Kenneth Flynn. | 
-            <a href="https://github.com/flynnkennethd/rockPaperScissors">Check out my GitHub</a>
+            <a href="https://github.com/flynnkennethd/rockPaperScissors" target="_blank" rel="noopener noreferrer">Check out my GitHub</a>
         </p>
     </footer>
     <script src="javascript.js"></script>
