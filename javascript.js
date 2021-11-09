@@ -1,20 +1,59 @@
-const userScoreCounter= document.getElementById('user-score');
-const cpuScoreCounter = document.getElementById('cpu-score');
-const winLoseMessage = document.getElementById('win-lose-message');
-const userIndicator = document.getElementById('user-indicator');
-const cpuIndicator = document.getElementById('cpu-indicator');
+const userScoreCounter= document.querySelector('#user-score');
+const cpuScoreCounter = document.querySelector('#cpu-score');
+const winLoseMessage = document.querySelector('#win-lose-message');
+const userIndicator = document.querySelector('#user-indicator');
+const cpuIndicator = document.querySelector('#cpu-indicator');
+const rockBtn = document.querySelector('#rock');
+const paperBtn = document.querySelector('#paper');
+const scissorsBtn = document.querySelector('#scissors');
 let user;
 let cpu;
 let userScore = 0;
 let cpuScore = 0;
 let decision;
 
+//eventlisteners to receive user input and run game
+//rock
+rockBtn.addEventListener('click', function(){
+    userChoice('rock');
+    cpuChoice();
+    compare();
+    scoreUpdate();
+    messageWriter();
+    gameEnd();
+    scoreUpdate();
+})
+//paper
+paperBtn.addEventListener('click', function(){
+    userChoice('paper');
+    cpuChoice();
+    compare();
+    scoreUpdate();
+    messageWriter();
+    gameEnd();
+    scoreUpdate();
+})
+//scissors
+scissorsBtn.addEventListener('click', function(){
+    userChoice('scissors');
+    cpuChoice();
+    compare();
+    scoreUpdate();
+    messageWriter();
+    gameEnd();
+    scoreUpdate();
+})
+
+
+
+
+
 //function that assigns the user's choice to the user variable and displays it in the indicator
 function userChoice(choice) {
     user = choice;
-    userIndicator.innerHTML = `You chose ${user}.`;
+    userIndicator.textContent = `You chose ${user}.`;
 }
-//function to assign the cpu choice and display it in the indicator
+//function to assign the cpu a random choice and display it in the dom
 function cpuChoice() {
     let randomNum = Math.floor(Math.random() * 3);
     switch (randomNum){
@@ -28,7 +67,7 @@ function cpuChoice() {
             cpu = 'scissors';
             break;
     }
-    cpuIndicator.innerHTML = `Computer chose ${cpu}.`;
+    cpuIndicator.textContent = `Computer chose ${cpu}.`;
 }
 
 //function to compare user and cpu and return the win/lose message
@@ -68,30 +107,41 @@ function compare() {
         }
     }
 }
+//dsiplays a message to identify the winner of the round
 function messageWriter() {
     if (decision === 'tie'){
-        winLoseMessage.innerHTML = "It's a tie!";
+        winLoseMessage.textContent = "It's a tie!";
     }
     else if (decision === 'loss') {
-        winLoseMessage.innerHTML = 'Sorry! You lost this round.';
+        winLoseMessage.textContent = 'Sorry! You lost this round.';
     }
-    else {
-        winLoseMessage.innerHTML = 'You won!';
+    else if (decision === 'win') {
+        winLoseMessage.itextContent = 'You won!';
     }
 }
+//updates the dom to reflect the appropriate scores
 function scoreUpdate() {
-    userScoreCounter.innerHTML = userScore;
-    cpuScoreCounter.innerHTML = cpuScore;
+    userScoreCounter.textContent = userScore;
+    cpuScoreCounter.textContent = cpuScore;
 }
+//checks to see if the score goal has been reached and displays proper alert
 function gameEnd() {
     if (userScore === 3) {
-        winLoseMessage.innerHTML = 'You won the best of 5!'
+        alert(`You won the best of 5! \n Score: ${userScore} to ${cpuScore}`);
         userScore = 0;
         cpuScore = 0;
+        winLoseMessage.textContent = '';
+        cpuIndicator.textContent = '';
+        userIndicator.textContent = '';
     }
     else if (cpuScore === 3){
-        winLoseMessage.innerHTML = 'Oh  no! You lost the best of 5.'
+        alert(
+            `Oh no! You lost the best of 5! \n Score: ${userScore} to ${cpuScore}`
+        );
         userScore = 0;
         cpuScore = 0;
+        winLoseMessage.textContent = '';
+        cpuIndicator.textContent = '';
+        userIndicator.textContent = '';
     }
 }
